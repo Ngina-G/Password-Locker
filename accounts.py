@@ -23,3 +23,11 @@ class Account:
 
         Account.account_list.append(self)
 
+    def delete_account(self):
+        '''
+        Class that delete an instance of an account object
+        '''
+
+        Account.account_list.remove(self)
+        
+
