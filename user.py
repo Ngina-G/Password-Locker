@@ -1,3 +1,4 @@
+import email
 import pyperclip
 
 class User:
@@ -38,8 +39,32 @@ class User:
                 return user
 
     @classmethod
+    def user_exists(cls, email):
+        '''
+        Method that checks if a user exists from the user list.
+
+        Args:
+            User: Account user to search if it exists
+        Returns :
+            Boolean: True or false depending if the account exists
+        '''
+
+        for user in cls.user_list:
+            if user.user_email == email:
+                return False
+        return True
+
+    @classmethod
     def display_users(cls):
         '''
         method that returns the users list
         '''
         return cls.user_list
+
+    # @classmethod
+    # def copy_user(cls, email):
+    #     '''
+    #     method to copy user details
+    #     '''
+    #     user_found = User.find_by_user_email(email)
+    #     pyperclip.copy(user_found.user)
