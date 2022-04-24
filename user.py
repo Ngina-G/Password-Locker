@@ -14,3 +14,11 @@ class User:
         self.user= user_name
         self.user_email= email
         self.user_pass= password
+
+    def save_user(self):
+        '''
+        Class that saves the new user details to the user_list
+        '''
+
+        User.user_list.append(self)
+
