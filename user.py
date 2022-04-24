@@ -23,6 +23,14 @@ class User:
 
         User.user_list.append(self)
 
+    def delete_user(self):
+        '''
+        Class that delete an instance of an user object
+        '''
+
+        User.user_list.remove(self)
+
+
     @classmethod
     def find_by_user_email(cls, email):
         '''

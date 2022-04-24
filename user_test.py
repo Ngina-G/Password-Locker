@@ -47,6 +47,19 @@ class TestUser(unittest.TestCase):
         test_user.save_user()
         self.assertEqual(len(User.user_list),2)
 
+    def test_delete_account(self):
+        '''
+        Test to check whether the app can delete an account object
+        '''
+
+        self.new_user.save_user()
+        test_user = User("John Doe", "johndoe@gmail.com", "pass1234")
+        test_user.save_user()
+        
+        self.new_user.delete_user()
+        self.assertEqual(len(User.user_list),1)
+
+
     def test_find_by_user_email(self):
         '''
         Test to check if we can find an user object by its email
