@@ -37,6 +37,28 @@ class TestUser(unittest.TestCase):
         self.new_user.save_user()
         self.assertEqual(len(User.user_list),1)
 
+    def test_save_multiple_user(self):
+        '''
+        Test to check if app can save multiple account objects to the user_list
+        '''
+
+        self.new_user.save_user()
+        test_user = User("John Doe", "johndoe@gmail.com", "pass1234")
+        test_user.save_user()
+        self.assertEqual(len(User.user_list),2)
+
+    def test_find_by_user_email(self):
+        '''
+        Test to check if we can find an user object by its email
+        '''
+
+        self.new_user.save_user()
+        test_user = User("John Doe", "johndoe@gmail.com", "pass1234")
+        test_user.save_user()
+
+        found_user = User.find_by_user_email("johndoe@gmail.com")
+        self.assertEqual(found_user.user, test_user.user)
+
 
 if __name__ == '__main__':
     unittest.main()

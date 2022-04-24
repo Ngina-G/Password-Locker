@@ -22,3 +22,17 @@ class User:
 
         User.user_list.append(self)
 
+    @classmethod
+    def find_by_user_email(cls, email):
+        '''
+        Method that finds the account user name and object by the user's email
+
+        Args:
+            User: Account user name to search for 
+        Returns:
+            User details that match the user name.
+        '''
+
+        for user in cls.user_list:
+            if user.user_email == email:
+                return user

@@ -22,7 +22,7 @@ class TestCredentails(unittest.TestCase):
         '''
         self.assertEqual(self.new_account.account_name,"Netflix")
         self.assertEqual(self.new_account.account_user,"Annet")
-        self.assertEqual(self.new_account.email,"janet@gmial.com")
+        self.assertEqual(self.new_account.email,"janet@gmail.com")
         self.assertEqual(self.new_account.password,"Hb(9Mnn!05n")
     
     def tearDown(self):
@@ -44,7 +44,7 @@ class TestCredentails(unittest.TestCase):
         '''
 
         self.new_account.save_account()
-        test_account = Account("Application", "John Doe", "johndoe@gmial.com", "pass1234")
+        test_account = Account("Application", "John Doe", "johndoe@gmail.com", "pass1234")
         test_account.save_account()
         self.assertEqual(len(Account.account_list),2)
 
@@ -54,7 +54,7 @@ class TestCredentails(unittest.TestCase):
         '''
 
         self.new_account.save_account()
-        test_account = Account("Application", "John Doe", "johndoe@gmial.com", "pass1234")
+        test_account = Account("Application", "John Doe", "johndoe@gmail.com", "pass1234")
         test_account.save_account()
         
         self.new_account.delete_account()
@@ -66,7 +66,7 @@ class TestCredentails(unittest.TestCase):
         '''
 
         self.new_account.save_account()
-        test_account = Account("Application", "John Doe", "johndoe@gmial.com", "pass1234")
+        test_account = Account("Application", "John Doe", "johndoe@gmail.com", "pass1234")
         test_account.save_account()
 
         found_account = Account.find_by_account_name("Application")
@@ -78,7 +78,7 @@ class TestCredentails(unittest.TestCase):
         '''
 
         self.new_account.save_account()
-        test_account = Account("Application", "John Doe", "johndoe@gmial.com", "pass1234")
+        test_account = Account("Application", "John Doe", "johndoe@gmail.com", "pass1234")
         test_account.save_account()
 
         account_exists = Account.account_exists("Application")
