@@ -11,3 +11,10 @@ class Accounts:
         init method for the account list details
         '''
 
+        self.account= account_name
+        self.account_user= user_name
+        self.email= login_email
+        self.password= password
+
+
+
