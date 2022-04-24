@@ -2,7 +2,7 @@ import unittest
 from credential import Account
 import pyperclip
 
-class TestAccount(unittest.TestCase):
+class TestCredentails(unittest.TestCase):
     '''
         Test class that defines test cases for the accounts class behaviors
     
