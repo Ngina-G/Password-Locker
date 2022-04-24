@@ -60,6 +60,18 @@ class TestAccount(unittest.TestCase):
         self.new_account.delete_account()
         self.assertEqual(len(Account.account_list),1)
 
+    def test_find_account_by_the_account_name(self):
+        '''
+        Test to check if we can find an account object by its name
+        '''
+
+        self.new_account.save_account()
+        test_account = Account("Application", "John Doe", "johndoe@gmial.com", "pass1234")
+        test_account.save_account()
+
+        found_account = Account.find_by_the_account_name("Netflix")
+        self.assertAlmostEqual(found_account.account_user, test_account.account_user)
+
 
 if __name__ == '__main__':
     unittest.main()
