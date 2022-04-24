@@ -1,6 +1,6 @@
 import pyperclip
 
-class Accounts:
+class Account:
     '''
     Class that instantiates the accounts and their details.
     '''
