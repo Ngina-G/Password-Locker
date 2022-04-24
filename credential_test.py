@@ -1,5 +1,5 @@
 import unittest
-from accounts import Account
+from credential import Account
 import pyperclip
 
 class TestAccount(unittest.TestCase):
