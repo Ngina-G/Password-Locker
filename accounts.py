@@ -60,3 +60,10 @@ class Account:
             if account.account_name == the_account:
                 return True
         return False
+
+    @classmethod
+    def display_accounts(cls):
+        '''
+        method that returns the accounts list
+        '''
+        return cls.account_list
