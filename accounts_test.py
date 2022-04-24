@@ -30,3 +30,15 @@ class TestAccount(unittest.TestCase):
         tearDown method that does clean up after each test case has run.
         '''
         Account.account_list= []
+
+    def test_save_account(self):
+        '''
+        test_save_account test case to test if the account object is saved into the account list
+        '''
+        self.new_account.save_account()
+        self.assertEqual(len(Account.account_list),1)
+
+
+
+if __name__ == '__main__':
+    unittest.main()

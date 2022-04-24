@@ -16,5 +16,10 @@ class Account:
         self.email= login_email
         self.password= password
 
+    def save_account(self):
+        '''
+        Class that saves the new account details to the account_list
+        '''
 
+        Account.account_list.append(self)
 
