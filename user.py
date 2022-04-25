@@ -69,6 +69,31 @@ class User:
         '''
         return cls.user_list
 
+    @classmethod
+    def user_login(cls, email, password):
+        '''
+        method that returns the login prompts
+        '''
+        for user in cls.user_list:
+            if user.user_email == email and user.user_password == password:
+                print('User logged in successfully')
+                return user
+            print('Wrong login details, please try again!')
+        return False
+
+    @classmethod
+    def new_user_login(cls, user_name, email, password):
+        '''
+        method that returns the new user's login
+        '''
+        for user in cls.user_list:
+            if user.user == user_name and user.user_email == email and user.user_password == password:
+                print('User account created successfully')
+                return True
+            print('Wrong login details, please try again!')
+        return False
+        
+
     # @classmethod
     # def copy_user(cls, email):
     #     '''
