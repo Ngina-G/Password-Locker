@@ -6,7 +6,7 @@ class Account:
     '''
 
     account_list =[]
-    def __init__(self, the_account, account_user_name, login_email, login_password):
+    def __init__(self, the_account, account_user_name, login_email, password):
         '''
         init method for the account list details
         '''
@@ -14,7 +14,7 @@ class Account:
         self.account_name= the_account
         self.account_user= account_user_name
         self.email= login_email
-        self.password= login_password
+        self.password= password
 
     def save_account(self):
         '''

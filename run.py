@@ -19,7 +19,7 @@ def save_user(user):
     '''
     Function to save user
     '''
-    user.save_user()
+    return user.save_user()
 
 def del_user(user):
     '''
@@ -51,11 +51,11 @@ def user_login(email,password):
     '''
     Function that returns the user login
     '''
-    this_user = User.user_list(email, password)
-    if not this_user:
+    user = User.user_login(email, password)
+    if not user:
         user_name, password = ask_for_login_details()
         return user_login(user_name, password)
-    return this_user
+    return user
 
 def ask_for_login_details():
     email = input('Enter email: ')
@@ -107,16 +107,15 @@ def main():
     user = None
 
     print('Hi, kindly sign up to use password locker.')
-    print("\n")
   
     print('Create your User Name?')
     user_name= input()
 
-    print(f'hello {user_name}. Add your email address.')
-    email= input()
+    print(f'Hi, {user_name}!')
+    email= input('Add your email address: ')
     print("\n")
 
-    print(f'Email entered: {email}. Add your password.')
+    print('Now enter your numerical 6 figure pasword')
     password = input()
     print("\n")
 
@@ -129,79 +128,81 @@ def main():
             user = new_user
 
     while True:
-
-        if user:
-            print('\n Use these short codes: \n ca- create a new account, \nda- to  display accounts, \nfa- to find an account, \nde- to delete an account and \nex- to exit.')
+        # if user:
+            print('\nPlease create and save an account')
+            print('\n Use these short codes: \nca- create a new account, \nda- to  display accounts, \nfa- to find an account, \nde- to delete an account and \nex- to exit.')
             short_code= input().lower()
 
-        if short_code == 'cc':
-            the_account = input('\nEnter the account name (Twitter): ')
-            account_user_name = input('\nEnter your account user name: ')
-            login_email = input('\nEnter your account email: ')
-            print('\nDo you have a password? y/n')
-            no = input().lower()
-            yes = input().lower()
-            if yes == 'y':
-                length = int(input('\nEnter the length of password: '))
-                lower = string.ascii_lowercase
-                upper = string.ascii_uppercase
-                num = string.digits
-                symbols = string.punctuation
-                all = lower + upper + num + symbols
-                temp = random.sample(all,length)
-                login_password = "".join(temp)
-                print(login_password)
-                return login_password
-            elif no == 'n':
-                login_password=input('\nEnter your password: ')
+            if short_code == 'ca':
+                the_account = input('\nEnter the account name (Twitter): ')
+                account_user_name = input('\nEnter your account user name: ')
+                login_email = input('\nEnter your account email: ')
+                print('\nWould you like us to generate a password for you? y/n')
+                no = input().lower()
+                yes = input().lower()
 
-            save_account(create_account(the_account, account_user_name, login_email, login_password))
-            print(f'\nYour accoutn details are as fllows:')
-            print(f'\nNew {the_account} account with the username {account_user_name} email- {login_email} and password {login_password} created')
+                if yes == 'y':
+                    login_password=input('\nEnter your password: ')
+                elif no == 'n':
+                    print('Generating one for you')
+                    length = int(input('\nEnter the length of password: '))
+                    lower = string.ascii_lowercase
+                    upper = string.ascii_uppercase
+                    num = string.digits
+                    symbols = string.punctuation
+                    all = lower + upper + num + symbols
+                    temp = random.sample(all,length)
+                    login_password = "".join(temp)
+                    print(login_password)
+                    return login_password
+
+                save_account(create_account(the_account, account_user_name, login_email, login_password))
+                print(f'\nYour accoutn details are as fllows:')
+                print(f'\nNew {the_account} account with the username {account_user_name} email- {login_email} and password {login_password} created')
 
 
-        elif short_code == 'da':
-            if display_account():
-                print('Here is a list of all your accounts')
-                print('\n')
-
-                for account in display_account():
-                    print(f'{account.the_account} {account.account_user_name} ....{account.login_email} ....{account.login_password}')
-                    print('\n')
-                    print('You don\'t seem to have any accounts saved yet')
+            elif short_code == 'da':
+                if display_account():
+                    print('Here is a list of all your accounts')
                     print('\n')
 
-            else:
-                print('\n')
-                print("You don\'t seem to have any accounts saved yet")
-                print('\n')
+                    for account in display_account():
+                        print(f'{account.the_account} {account.account_user_name} ....{account.login_email} ....{account.login_password}')
+                        print('\n')
+                        print('You don\'t seem to have any accounts saved yet')
+                        print('\n')
 
-        elif short_code =='fa':
-                print("Enter the account name you want to search for")
-
-                search_account_name = input()
-
-                if check_existing_account(search_account_name):
-                    search_account= find_account(search_account_name)
-                    print(f'{search_account.account_name}, {search_account.account_user}')
-                    print('-'*20)
-
-                    print(f'Email address..{search_account.email}')
-                    print(f'Email adress ...{search_account.password}')
                 else:
-                    print('That contact does not exist')
+                    print('\n')
+                    print("You don\'t seem to have any accounts saved yet")
+                    print('\n')
 
-        elif short_code == 'de':
-            print('Are you sure you want to delete?')
-            account = input('Enter account you want to delete: ')
-            print('Account to be deleted: ', account)
-            del_account(account)
+            elif short_code =='fa':
+                    print("Enter the account name you want to search for")
 
-        elif short_code == 'ex':
-            print('Bye ....')
-            break
-        else:
-            print('I really didn\'t get that. Please use the short codes.')
+                    search_account_name = input()
+
+                    if check_existing_account(search_account_name):
+                        search_account= find_account(search_account_name)
+                        print(f'{search_account.account_name}, {search_account.account_user}')
+                        print('-'*20)
+
+                        print(f'Email address..{search_account.email}')
+                        print(f'Email adress ...{search_account.password}')
+                    else:
+                        print('That contact does not exist')
+
+            elif short_code == 'de':
+                print('Are you sure you want to delete?')
+                account = input('Enter account you want to delete: ')
+                print('Account to be deleted: ', account)
+                del_account(account)
+
+            elif short_code == 'ex':
+                print('Bye ....')
+                break
+            else:
+                print('I really didn\'t get that. Please use the short codes.')
 
 if __name__ =='__main__':
     main()

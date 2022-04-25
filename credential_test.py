@@ -14,7 +14,7 @@ class TestCredentails(unittest.TestCase):
         '''
         Set up method to run before each test case
         '''
-        self.new_account = Account("Netflix", "Annet", "janet@gmial.com", "Hb(9Mnn!05n")
+        self.new_account = Account("Netflix", "Annet", "janet@gmail.com", "Hb(9Mnn!05n")
 
     def test_init(self):
         '''
