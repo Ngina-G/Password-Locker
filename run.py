@@ -4,6 +4,7 @@ from operator import concat
 import re
 
 from click import password_option
+from httplib2 import Credentials
 from credential import Account
 from user import User
 import random
@@ -40,11 +41,11 @@ def check_existing_user(email):
     new_user_entered = User.user_list(email)
     return new_user_entered
 
-def display_user():
+def display_user(self):
     '''
     Function that returns all the saved users
     '''
-    return User.display_users()
+    return self.user_list
 
 # user login functions
 def user_login(email,password):
@@ -76,16 +77,23 @@ def save_account(account):
     '''
     return account.save_account()
 
-def del_account(account):
+def del_account(the_account):
     '''
     Function to delete an account
     '''
-    account.delete_account()
+    the_account.delete_account()
 
-def display_account():
+
+def display_accounts():
     '''
     Function that returns all the saved accounts
     '''
+    # credentials = Account.show_account()
+    # for credential in credentials:
+    #     print(credential.the_account)
+    #     print(credential.account_user)
+    #     print(credential.email)
+    #     print(credential.password)
     return Account.display_accounts()
 
 def find_account(the_account):
@@ -98,8 +106,7 @@ def check_existing_account(the_account):
     '''
     Function to check if a account exists with that number and return a Boolean
     '''
-    new_account = Account.account_list(the_account)
-    return new_account
+    return Account.account_exists(the_account)
 
 
 
@@ -134,42 +141,40 @@ def main():
             short_code= input().lower()
 
             if short_code == 'ca':
-                the_account = input('\nEnter the account name (Twitter): ')
-                account_user_name = input('\nEnter your account user name: ')
-                login_email = input('\nEnter your account email: ')
+                the_acc = input('\nEnter the account name (Twitter): ')
+                acc_user_name = input('\nEnter your account user name: ')
+                log_email = input('\nEnter your account email: ')
                 print('\nWould you like us to generate a password for you? y/n')
                 no = input().lower()
                 yes = input().lower()
 
-                if yes == 'y':
-                    login_password=input('\nEnter your password: ')
-                elif no == 'n':
+                if no == 'n':
+                    log_password=input('Enter your password: ')
+                    print(log_password)
+                elif yes == 'y':
                     print('Generating one for you')
-                    length = int(input('\nEnter the length of password: '))
+                    length = int(input('Enter the length of password: '))
                     lower = string.ascii_lowercase
                     upper = string.ascii_uppercase
                     num = string.digits
                     symbols = string.punctuation
                     all = lower + upper + num + symbols
                     temp = random.sample(all,length)
-                    login_password = "".join(temp)
-                    print(login_password)
-                    return login_password
+                    log_password = "".join(temp)
+                    print(log_password)
 
-                save_account(create_account(the_account, account_user_name, login_email, login_password))
-                print(f'\nYour accoutn details are as fllows:')
-                print(f'\nNew {the_account} account with the username {account_user_name} email- {login_email} and password {login_password} created')
+                save_account(create_account(the_acc, acc_user_name, log_email, log_password))
+                print('\nYour accoutn details are as fllows:')
+                print(f'\nNew {the_acc} account with the username {acc_user_name} email- {log_email} and password {log_password} created')
 
 
             elif short_code == 'da':
-                if display_account():
+                if display_accounts():
                     print('Here is a list of all your accounts')
                     print('\n')
 
-                    for account in display_account():
-                        print(f'{account.the_account} {account.account_user_name} ....{account.login_email} ....{account.login_password}')
-                        print('\n')
-                        print('You don\'t seem to have any accounts saved yet')
+                    for account in display_accounts():
+                        print(f'~For account: {account.account_name} user name: {account.account_user} email: {account.email} and password: {account.password}')
                         print('\n')
 
                 else:
@@ -184,19 +189,24 @@ def main():
 
                     if check_existing_account(search_account_name):
                         search_account= find_account(search_account_name)
-                        print(f'{search_account.account_name}, {search_account.account_user}')
+                        print(f'{search_account.account_name}, User name...{search_account.account_user}')
                         print('-'*20)
 
                         print(f'Email address..{search_account.email}')
-                        print(f'Email adress ...{search_account.password}')
+                        print(f'Account password ...{search_account.password}')
                     else:
                         print('That contact does not exist')
 
             elif short_code == 'de':
-                print('Are you sure you want to delete?')
-                account = input('Enter account you want to delete: ')
-                print('Account to be deleted: ', account)
-                del_account(account)
+                print('Enter account you want to delete: ')
+                search_account_name = input()
+
+                if check_existing_account(search_account_name):
+                    search_account= find_account(search_account_name)
+                    print(f'Deleting {search_account.account_name} account!')
+                    del_account(search_account)
+                else:
+                    print('That contact does not exist')
 
             elif short_code == 'ex':
                 print('Bye ....')
