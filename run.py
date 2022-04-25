@@ -136,7 +136,7 @@ def main():
 
     while True:
         # if user:
-            print('\nPlease create and save an account')
+            print('\nPlease choose an action')
             print('\n Use these short codes: \nca- create a new account, \nda- to  display accounts, \nfa- to find an account, \nde- to delete an account and \nex- to exit.')
             short_code= input().lower()
 
@@ -146,12 +146,12 @@ def main():
                 log_email = input('\nEnter your account email: ')
                 print('\nWould you like us to generate a password for you? y/n')
                 no = input().lower()
-                yes = input().lower()
+                # yes = input().lower()
 
                 if no == 'n':
                     log_password=input('Enter your password: ')
                     print(log_password)
-                elif yes == 'y':
+                else:
                     print('Generating one for you')
                     length = int(input('Enter the length of password: '))
                     lower = string.ascii_lowercase
