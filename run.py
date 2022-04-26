@@ -164,7 +164,7 @@ def main():
                     print(log_password)
 
                 save_account(create_account(the_acc, acc_user_name, log_email, log_password))
-                print('\nYour accoutn details are as fllows:')
+                print('\nYour account details are as follows:')
                 print(f'\nNew {the_acc} account with the username {acc_user_name} email- {log_email} and password {log_password} created')
 
 
