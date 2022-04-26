@@ -47,7 +47,7 @@ class User:
                 return user
 
     @classmethod
-    def user_exists(cls, email):
+    def user_exists(cls, user_name, password):
         '''
         Method that checks if a user exists from the user list.
 
@@ -56,11 +56,10 @@ class User:
         Returns :
             Boolean: True or false depending if the account exists
         '''
-
         for user in cls.user_list:
-            if user.user_email == email:
-                return False
-        return True
+            if user.user == user_name and user.user_pass == password:
+                return True
+        return False
 
     @classmethod
     def display_users(cls):
