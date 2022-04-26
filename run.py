@@ -122,11 +122,20 @@ def main():
     print("\n")
 
     print('Now enter your numerical 6 figure pasword')
-    password = input()
+    print(" "*4 + "*the password must be 6 characters or longer*")
+    while True:
+        password = input()
+        if len(password) >= 6:
+            save_user(create_user(user_name, email, password))
+            print(f"\nAccount for {user_name} has been successfully created. \nProceed to login.\n")
+            break
+        else:
+            print("\n!!! The password you entered is too short !!!")
+            print("Please use a password of 6 characters or more!")
+            continue
     print("\n")
 
-    user_created = save_user(create_user(user_name, email, password))
-    # if user_created:
+
     print(f'\n Account created successfully')
     print("\nLOGIN")
     print("-"*7)
